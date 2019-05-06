@@ -74,13 +74,15 @@ echo "$ORACLE_PDB=
   )
 )" >> $ORACLE_HOME/network/admin/tnsnames.ora
 
+# COMMENTED - Only allowed on container DB
 # Remove second control file, fix local_listener, make PDB auto open, enable EM global port
-sqlplus / as sysdba << EOF
-   ALTER SYSTEM SET control_files='$ORACLE_BASE/oradata/$ORACLE_SID/control01.ctl' scope=spfile;
-   ALTER PLUGGABLE DATABASE $ORACLE_PDB SAVE STATE;
-   EXEC DBMS_XDB_CONFIG.SETGLOBALPORTENABLED (TRUE);
-   exit;
-EOF
+#sqlplus / as sysdba << EOF
+#   ALTER SYSTEM SET control_files='$ORACLE_BASE/oradata/$ORACLE_SID/control01.ctl' scope=spfile;
+#   ALTER PLUGGABLE DATABASE $ORACLE_PDB SAVE STATE;
+#   EXEC DBMS_XDB_CONFIG.SETGLOBALPORTENABLED (TRUE);
+#   exit;
+#EOF
 
 # Remove temporary response file
+#
 rm $ORACLE_BASE/dbca.rsp
