@@ -18,12 +18,12 @@ ORAENV_ASK=NO
 source oraenv
 
 # Check Oracle at least one PDB has open_mode "READ WRITE" and store it in status
-status=`sqlplus -s / as sysdba << EOF
+status="$(/opt/oracle/product/12.2.0.1/dbhome_1/bin/sqlplus -s / as sysdba << EOF
    set heading off;
    set pagesize 0;
    SELECT DISTINCT open_mode FROM v\\$database WHERE open_mode = '$OPEN_MODE';
    exit;
-EOF`
+EOF)"
 
 # Store return code from SQL*Plus
 ret=$?
